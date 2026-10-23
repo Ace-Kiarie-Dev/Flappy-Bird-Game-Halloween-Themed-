@@ -1408,4 +1408,12 @@
     }
 
     boot().catch((err) => console.error('Flappy Horror failed to load', err));
+
+    const isLocal = ['localhost', '127.0.0.1'].includes(location.hostname);
+    if ('serviceWorker' in navigator && location.protocol === 'https:' && !isLocal) {
+        // Without a trailing slash (nesturex.com) the page sits just outside sw.js's default
+        // scope, so widen it to the page path; the site sends Service-Worker-Allowed for this.
+        const scope = location.pathname.endsWith('/') ? './' : location.pathname;
+        navigator.serviceWorker.register('sw.js', { scope }).catch(() => {});
+    }
 })();

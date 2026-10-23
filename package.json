@@ -4,7 +4,8 @@
   "description": "Dev-only tooling for Flappy Horror. The game in Flappy Bird/ has no build step and no dependencies.",
   "type": "module",
   "scripts": {
-    "og": "node tools/make-og.mjs"
+    "og": "node tools/make-og.mjs",
+    "icons": "node tools/make-icons.mjs"
   },
   "devDependencies": {
     "@fontsource/sora": "^5.2.6",
