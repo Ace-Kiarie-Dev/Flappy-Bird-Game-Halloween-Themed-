@@ -1,6 +1,7 @@
 // Offline support. The page is network-first (so a new release shows up straight away);
 // everything else is cache-first. Bump CACHE when shipping changes so old caches get cleared.
-const CACHE = "nx-flappy-horror:v1";
+const CACHE_PREFIX = "nx-flappy-horror:";
+const CACHE = CACHE_PREFIX + "v1";
 // The scope is the page URL itself (with or without a trailing slash, depending on the host),
 // so the page is cached under the exact URL it's opened from rather than a redirect.
 // og.png is left out (it's only for link previews) and so is the music: see MUSIC below.
@@ -19,9 +20,11 @@ self.addEventListener("install", (e) => {
 });
 
 self.addEventListener("activate", (e) => {
+    // Only clear this game's old versions: other games on nesturex.com share the same
+    // Cache Storage (one per origin), so deleting every other cache would wipe theirs.
     e.waitUntil(
         caches.keys()
-            .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
+            .then((keys) => Promise.all(keys.filter((k) => k.startsWith(CACHE_PREFIX) && k !== CACHE).map((k) => caches.delete(k))))
             .then(() => self.clients.claim())
     );
 });
