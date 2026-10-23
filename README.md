@@ -46,13 +46,17 @@ The live game is served from the Nesture-X website (Next.js on Vercel) at
 
    ```sh
    cd "Flappy Bird"
+   DEST="../../../nesture-x-website/nesture-x-website/public/nx-gaming/flappy-horror"
+   mkdir -p "$DEST/fonts"
    cp index.html main.js style.css sw.js manifest.webmanifest \
       favicon.png apple-touch-icon.png icon-192.png icon-512.png icon-maskable-512.png og.png \
-      ghost.png toppipe.png bottompipe.png flappybirdbg2.png bg2.jpg df.mp3 \
-      "../../../nesture-x-website/nesture-x-website/public/nx-gaming/flappy-horror/"
+      ghost.webp toppipe.webp bottompipe.webp flappybirdbg2.webp bg2.jpg df.mp3 \
+      "$DEST/"
+   cp fonts/* "$DEST/fonts/"
    ```
 
-   (Don't copy `_redirects`; that file is only for Netlify. Don't copy `README.md` either.)
+   (Don't copy `_redirects`; that file is only for Netlify. The original `ghost.png`, `toppipe.png`,
+   `bottompipe.png` and `flappybirdbg2.png` are only the sources for the `.webp` files and aren't loaded by the game.)
 2. Bump `CACHE` in `sw.js` (`nx-flappy-horror:v1` → `v2`, …) whenever you ship changes, so returning players get the new version.
    The page itself is network-first, but every other file is served from the cache until `CACHE` changes.
 3. On the website, a route handler serves `public/nx-gaming/flappy-horror/index.html` at the clean URL and injects
@@ -64,13 +68,20 @@ The old Netlify site (`flappy-horror.netlify.app`, publishing `Flappy Bird/`) no
 
 ### Regenerating images
 
-The share image and the app icons are built with small Node scripts (dev-only dependencies; the game itself has none):
+The game's WebP sprites, the share image and the app icons are built with small Node scripts
+(dev-only dependencies; the game itself has none):
 
 ```sh
 npm install
+npm run sprites # ghost/toppipe/bottompipe/flappybirdbg2 .webp from the .png originals
 npm run og      # Flappy Bird/og.png (1200×630) from the ghost hero art
 npm run icons   # icon-192/512, icon-maskable-512 and apple-touch-icon from favicon.png
 ```
+
+Re-run `npm run sprites` after replacing any of those PNGs.
+
+Fonts are self-hosted in `Flappy Bird/fonts/` (latin subsets from Google Fonts, SIL OFL 1.1; the licences
+are next to them), so the game makes no third-party requests.
 
 `tools/make-og.mjs` reads the ghost from the website repo
 (`../../nesture-x-website/nesture-x-website/public/images/NX-Gaming/hero-flappy-horror.webp`).

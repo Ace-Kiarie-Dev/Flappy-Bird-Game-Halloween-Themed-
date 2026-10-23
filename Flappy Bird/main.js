@@ -1383,10 +1383,11 @@
             : Promise.resolve();
 
         const [ghostImg, topImg, bottomImg, bgImg] = await Promise.all([
-            loadImage('./ghost.png'),
-            loadImage('./toppipe.png'),
-            loadImage('./bottompipe.png'),
-            loadImage('./flappybirdbg2.png'),
+            // WebP copies of the PNGs, built by tools/make-sprites.mjs (same pixels, smaller files)
+            loadImage('./ghost.webp'),
+            loadImage('./toppipe.webp'),
+            loadImage('./bottompipe.webp'),
+            loadImage('./flappybirdbg2.webp'),
             fontLoads,
         ]);
 

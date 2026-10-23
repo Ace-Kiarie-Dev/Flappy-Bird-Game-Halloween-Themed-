@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "og": "node tools/make-og.mjs",
-    "icons": "node tools/make-icons.mjs"
+    "icons": "node tools/make-icons.mjs",
+    "sprites": "node tools/make-sprites.mjs"
   },
   "devDependencies": {
     "@fontsource/sora": "^5.2.6",

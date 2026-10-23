@@ -12,10 +12,10 @@ Every file in `Flappy Bird/`, who made it, and whether we have confirmed the rig
 | --- | ---: | --- | --- | --- |
 | `df.mp3` | 2,468 KB | Background music (looping soundtrack) | Downloaded, source and licence unknown | **No** |
 | `bg2.jpg` | 176 KB (1366×768) | Page background behind the game (`style.css`) | Downloaded, source and licence unknown | **No** |
-| `flappybirdbg2.png` | 163 KB (360×640) | In-game background, the castle and moon (`main.js`) | Downloaded, source and licence unknown | **No** |
-| `ghost.png` | 149 KB (408×288) | The player's ghost sprite | Peter Kiarie (NX Gaming) | Yes, own work |
-| `toppipe.png` | 575 KB (384×3072) | Zombie hands reaching down | Peter Kiarie (NX Gaming) | Yes, own work |
-| `bottompipe.png` | 539 KB (384×3072) | Zombie hands reaching up | Peter Kiarie (NX Gaming) | Yes, own work |
+| `flappybirdbg2.png` | 163 KB (360×640) | Source of the in-game background, the castle and moon | Downloaded, source and licence unknown | **No** |
+| `ghost.png` | 149 KB (408×288) | Source of the player's ghost sprite | Peter Kiarie (NX Gaming) | Yes, own work |
+| `toppipe.png` | 575 KB (384×3072) | Source of the zombie hands reaching down | Peter Kiarie (NX Gaming) | Yes, own work |
+| `bottompipe.png` | 539 KB (384×3072) | Source of the zombie hands reaching up | Peter Kiarie (NX Gaming) | Yes, own work |
 | `favicon.png` | 192 KB (512×512) | Browser tab icon; source art for the app icons below | Not recorded: ghost-with-scythe art | To confirm |
 
 Sound effects (flap, score, souls, thunder and so on) are synthesized live in `main.js` with the Web Audio API.
@@ -27,6 +27,10 @@ These are built by scripts in `tools/` and inherit the status of their sources.
 
 | File | Size | Built from | Licence confirmed? |
 | --- | ---: | --- | --- |
+| `flappybirdbg2.webp` | 15 KB | `flappybirdbg2.png` (`npm run sprites`, WebP quality 95). Loaded by `main.js` | **No**, same as `flappybirdbg2.png` |
+| `ghost.webp` | 60 KB | `ghost.png` (`npm run sprites`, lossless). Loaded by `main.js` | Yes, own work |
+| `toppipe.webp` | 362 KB | `toppipe.png` (`npm run sprites`, lossless). Loaded by `main.js` | Yes, own work |
+| `bottompipe.webp` | 340 KB | `bottompipe.png` (`npm run sprites`, lossless). Loaded by `main.js` | Yes, own work |
 | `icon-192.png` | 13 KB | `favicon.png` (`npm run icons`) | Same as `favicon.png` |
 | `icon-512.png` | 65 KB | `favicon.png` (`npm run icons`) | Same as `favicon.png` |
 | `icon-maskable-512.png` | 31 KB | `favicon.png` (`npm run icons`) | Same as `favicon.png` |
@@ -44,22 +48,24 @@ These are built by scripts in `tools/` and inherit the status of their sources.
 | `manifest.webmanifest` | 1 KB | NX Gaming | Yes, own work |
 | `_redirects` | under 1 KB | NX Gaming (Netlify config, not deployed to nesturex.com) | Yes, own work |
 
-## Fonts (not in the repo)
+## Fonts
 
-Loaded from Google Fonts at runtime. All are under the SIL Open Font License 1.1, which allows commercial use.
+Self-hosted in `Flappy Bird/fonts/`: the latin subsets Google Fonts serves, downloaded unchanged. All are under
+the SIL Open Font License 1.1, which allows commercial use; each licence file sits next to its font.
 
-| Font | Used for |
-| --- | --- |
-| Rubik Wet Paint | Dripping titles and scores |
-| Space Grotesk | Body text and buttons |
-| JetBrains Mono | Labels, hints and records |
-| Sora (800, 600) | Text in `og.png` only, drawn as paths (from the `@fontsource/sora` dev dependency) |
+| File | Size | Font | Used for | Licence confirmed? |
+| --- | ---: | --- | --- | --- |
+| `fonts/rubik-wet-paint-latin.woff2` | 74 KB | Rubik Wet Paint | Dripping titles and scores | Yes, OFL (`fonts/OFL-rubik-wet-paint.txt`) |
+| `fonts/space-grotesk-latin.woff2` | 22 KB | Space Grotesk (variable, 400–700) | Body text and buttons | Yes, OFL (`fonts/OFL-space-grotesk.txt`) |
+| `fonts/jetbrains-mono-latin.woff2` | 31 KB | JetBrains Mono (variable, 500–700) | Labels, hints and records | Yes, OFL (`fonts/OFL-jetbrains-mono.txt`) |
+| (not in the game) | | Sora (800, 600) | Text in `og.png` only, drawn as paths (from the `@fontsource/sora` dev dependency) | Yes, OFL |
 
 ## Replacing an asset
 
 **Easiest:** save the replacement under the **same file name and format** (for example a new `df.mp3`).
-No code changes are needed. Then bump `CACHE` in `sw.js` (`nx-flappy-horror:v1` → `v2`) so returning
-players get the new file, and copy it to the website as described in the README's Deploy section.
+No code changes are needed. For `flappybirdbg2.png` (and the sprite PNGs), then run `npm run sprites` to
+rebuild the `.webp` the game actually loads. Then bump `CACHE` in `sw.js` (`nx-flappy-horror:v1` → `v2`) so
+returning players get the new file, and copy it to the website as described in the README's Deploy section.
 
 Keep these shapes so the layout doesn't change:
 
@@ -74,4 +80,4 @@ Keep these shapes so the layout doesn't change:
 | --- | --- |
 | `df.mp3` | `Flappy Bird/index.html` (`<audio src>`), `Flappy Bird/sw.js` (`MUSIC`), README copy list |
 | `bg2.jpg` | `Flappy Bird/style.css` (`body` background), `Flappy Bird/sw.js` (`ASSETS`), README copy list |
-| `flappybirdbg2.png` | `Flappy Bird/main.js` (`loadImage` in `boot()`), `Flappy Bird/sw.js` (`ASSETS`), README copy list |
+| `flappybirdbg2.png` | `tools/make-sprites.mjs` (source), which writes `flappybirdbg2.webp`; that is referenced in `Flappy Bird/main.js` (`loadImage` in `boot()`), `Flappy Bird/sw.js` (`ASSETS`) and the README copy list |

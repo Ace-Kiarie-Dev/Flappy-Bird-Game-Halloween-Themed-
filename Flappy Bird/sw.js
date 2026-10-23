@@ -6,13 +6,12 @@ const CACHE = "nx-flappy-horror:v1";
 // og.png is left out (it's only for link previews) and so is the music: see MUSIC below.
 const ASSETS = [
     self.registration.scope, "index.html", "style.css", "main.js", "manifest.webmanifest",
-    "ghost.png", "toppipe.png", "bottompipe.png", "flappybirdbg2.png", "bg2.jpg",
+    "ghost.webp", "toppipe.webp", "bottompipe.webp", "flappybirdbg2.webp", "bg2.jpg",
+    "fonts/rubik-wet-paint-latin.woff2", "fonts/space-grotesk-latin.woff2", "fonts/jetbrains-mono-latin.woff2",
     "favicon.png", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "icon-maskable-512.png",
 ];
 // ~2.4 MB, so it isn't precached; it's cached the first time it plays.
 const MUSIC = new URL("df.mp3", self.registration.scope.replace(/\/?$/, "/")).href;
-// Google Fonts (the stylesheet and the font files) get cached on first use too.
-const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 self.addEventListener("install", (e) => {
     e.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(ASSETS)));
@@ -34,7 +33,7 @@ self.addEventListener("fetch", (e) => {
 
     if (req.mode === "navigate") e.respondWith(networkFirst(e));
     else if (url.href.split(/[?#]/)[0] === MUSIC) e.respondWith(music(e));
-    else if (url.origin === location.origin || FONT_HOSTS.includes(url.hostname)) e.respondWith(cacheFirst(e));
+    else if (url.origin === location.origin) e.respondWith(cacheFirst(e));
 });
 
 async function networkFirst(e) {
