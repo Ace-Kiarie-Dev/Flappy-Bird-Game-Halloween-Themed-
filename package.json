@@ -1,0 +1,14 @@
+{
+  "name": "flappy-horror-tools",
+  "private": true,
+  "description": "Dev-only tooling for Flappy Horror. The game in Flappy Bird/ has no build step and no dependencies.",
+  "type": "module",
+  "scripts": {
+    "og": "node tools/make-og.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/sora": "^5.2.6",
+    "opentype.js": "^1.3.4",
+    "sharp": "^0.34.4"
+  }
+}
