@@ -432,6 +432,41 @@ body.blood-moon .cabinet__frame::before {
 .phase-btn[hidden], .pause-btn[hidden] { display: none; }
 @keyframes phaseReady { 50% { transform: scale(1.08); box-shadow: 0 0 0 2px rgba(255,255,255,0.6) inset, 0 0 14cqw rgba(95, 245, 209, 1); } }
 
+/* ---------- How to play ---------- */
+.howto {
+    position: relative; z-index: 1;
+    max-width: 1040px; margin: 8px auto 0;
+    padding: 0 clamp(16px, 3vw, 40px);
+}
+.howto__title {
+    margin: 0 0 16px; font-family: var(--font-mono); font-weight: 700;
+    font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--mist);
+    display: flex; align-items: center; gap: 12px;
+}
+.howto__title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.howto__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+.howto__block {
+    padding: 18px 20px; border-radius: 14px;
+    background: rgba(11, 18, 21, 0.72); border: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+    font-size: 15px; line-height: 1.65; color: var(--mist);
+}
+.howto__block p { margin: 0; }
+.howto__block p + p { margin-top: 12px; }
+.howto__h {
+    margin: 0 0 10px; font-family: var(--font-mono); font-weight: 700;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--pumpkin);
+}
+.howto__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.howto__list strong { color: var(--bone); font-weight: 700; }
+.howto__link {
+    display: inline-block; margin-top: 16px;
+    color: var(--ecto); font-weight: 700; text-decoration: none;
+    border-bottom: 1px solid rgba(95, 245, 209, 0.35);
+}
+.howto__link:hover { border-bottom-color: var(--ecto); }
+.howto__link:focus-visible { outline: 2px solid var(--ecto); outline-offset: 3px; border-radius: 2px; }
+
 /* ---------- Footer ---------- */
 .footer {
     position: relative; z-index: 1;
@@ -466,6 +501,8 @@ body.blood-moon .cabinet__frame::before {
     .panel { max-width: 520px; width: 100%; margin: 0 auto; }
     .panel--lore { order: 2; }
     .panel--records { order: 3; }
+    .howto { max-width: 544px; padding: 0 12px; margin-top: 0; }
+    .howto__grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
