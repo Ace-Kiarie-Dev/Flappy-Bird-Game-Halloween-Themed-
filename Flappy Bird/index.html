@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <script>
+        // Assets use relative paths. Served without a trailing slash (e.g. /nx-gaming/flappy-horror),
+        // they'd resolve one folder too high, so point them back into the game's folder.
+        // nesturex.com injects a <base> server-side already; this is the fallback for other hosts.
+        (function () {
+            var p = location.pathname;
+            if (!document.querySelector("base") && !/\/$|\.html?$/.test(p)) {
+                document.write('<base href="' + p + '/">');
+            }
+        })();
+    </script>
     <title>Flappy Horror · The Reaper's Flight | NX Gaming</title>
     <meta name="description" content="Flappy Horror: The Reaper's Flight. Guide a little reaper through grasping hands, harvest lost souls and phase through the dead. An NX Gaming original.">
     <meta name="theme-color" content="#05080a">
