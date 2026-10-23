@@ -75,6 +75,10 @@ npm run icons   # icon-192/512, icon-maskable-512 and apple-touch-icon from favi
 `tools/make-og.mjs` reads the ghost from the website repo
 (`../../nesture-x-website/nesture-x-website/public/images/NX-Gaming/hero-flappy-horror.webp`).
 
+## Assets
+
+See [ASSETS.md](ASSETS.md) for every asset file, who made it and its licence status, and how to swap one out.
+
 ## Tech
 
 Vanilla HTML, CSS and JavaScript, rendered on a single `<canvas>`.
