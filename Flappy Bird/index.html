@@ -69,7 +69,7 @@
     </div>
 
     <header class="topbar">
-        <a class="brand" href="#" aria-label="NX Gaming">
+        <a class="brand" href="https://nesturex.com/nx-gaming" aria-label="NX Gaming: all games">
             <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
                 <path d="M6 40V8h6l14 20V8h6v32h-6L12 20v20z" fill="currentColor"/>
                 <path d="M30 8h7l5 8 5-8h1l-8 13 8 19h-7l-4-9-4 9h-1l7-17z" fill="var(--blood)"/>
@@ -124,6 +124,7 @@
                                 <span>Begin the Haunt</span>
                             </button>
                             <p class="ov-hint">Space · Click · Tap</p>
+                            <a class="btn btn--ghost btn--more" href="https://nesturex.com/nx-gaming"><span>More games</span></a>
                         </div>
                     </div>
 
@@ -170,6 +171,7 @@
                                 <button class="btn btn--ghost" id="menuBtn" type="button"><span>Menu</span></button>
                             </div>
                             <p class="ov-hint">Enter to retry</p>
+                            <a class="btn btn--ghost btn--more" id="overMoreBtn" href="https://nesturex.com/nx-gaming"><span>More games</span></a>
                         </div>
                     </div>
 
@@ -240,6 +242,7 @@
         <p class="footer__small">Flappy Horror · The Reaper's Flight is an NX Gaming original.</p>
     </footer>
 
-    <audio id="music" src="./df.mp3" loop preload="auto"></audio>
+    <!-- preload="none": the ~2.4 MB track only downloads once a run starts (music.play() in main.js). -->
+    <audio id="music" src="./df.mp3" loop preload="none"></audio>
 </body>
 </html>

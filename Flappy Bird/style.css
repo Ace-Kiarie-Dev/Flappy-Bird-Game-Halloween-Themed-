@@ -324,6 +324,14 @@ body.blood-moon .cabinet__frame::before {
     box-shadow: 0 0 0 1px var(--line-2) inset;
 }
 .btn--ghost:hover { background: rgba(95, 245, 209, 0.12); box-shadow: 0 0 0 1px var(--ecto) inset; }
+/* "More games" link: smaller, and well below the play controls so a flap tap can't land on it */
+.btn--more {
+    display: inline-block; margin-top: 7cqh;
+    padding: 2.4cqw 5.5cqw; font-size: 3.1cqw;
+    text-decoration: none; color: var(--mist);
+}
+.btn--more:hover { color: var(--bone); }
+.btn--more[aria-disabled="true"] { pointer-events: none; }
 .btn-row { display: flex; gap: 3cqw; margin-top: 5cqh; }
 .btn-row .btn { margin-top: 0; padding: 3.4cqw 6cqw; }
 @keyframes pulse { 50% { box-shadow: 0 0 0 1px rgba(255, 120, 130, 0.4) inset, 0 10px 46px -4px rgba(227, 38, 58, 0.95); } }

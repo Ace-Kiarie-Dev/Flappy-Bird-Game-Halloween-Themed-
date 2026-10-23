@@ -79,6 +79,8 @@
     const phaseBtn = $('phaseBtn');
     const pauseBtn = $('pauseBtn');
     const muteBtn = $('muteBtn');
+    const overMoreBtn = $('overMoreBtn');
+    const MORE_LINK_GUARD_MS = 1000;
     const flashEl = document.querySelector('.atmos__flash');
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     const PHASE_HINT = isTouch ? 'tap the orb' : 'shift / e';
@@ -653,6 +655,9 @@
         showScreen('over');
         music.volume = 0.14;
         setBloodClass(false);
+        // Players are often still tapping when they die; don't let a stray tap leave the game.
+        overMoreBtn.setAttribute('aria-disabled', 'true');
+        setTimeout(() => overMoreBtn.removeAttribute('aria-disabled'), MORE_LINK_GUARD_MS);
     }
 
     // ---------- Pipes & souls ----------
@@ -1297,7 +1302,8 @@
     const FLAP_KEYS = new Set(['Space', 'ArrowUp', 'KeyX', 'KeyW']);
 
     document.addEventListener('keydown', (e) => {
-        const inTopbar = e.target.closest && e.target.closest('.topbar');
+        // Let Space/Enter activate the top bar and links (e.g. "More games") instead of the game.
+        const inTopbar = e.target.closest && e.target.closest('.topbar, a');
         if (inTopbar && (e.code === 'Space' || e.code === 'Enter')) return;
 
         if (FLAP_KEYS.has(e.code)) {
@@ -1319,7 +1325,7 @@
     });
 
     stage.addEventListener('pointerdown', (e) => {
-        if (e.target.closest('button')) return;
+        if (e.target.closest('button, a')) return;
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         if (state === 'over') return; // only buttons / Enter retry, avoids accidental restarts
         e.preventDefault();
